@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MemoryGame
 {
     class Program
     {
+        private static readonly Random rnd = new Random();
         static void Main(string[] args)
         {
             while (true)
@@ -13,11 +15,9 @@ namespace MemoryGame
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        Console.WriteLine($"You chose easy level.");
                         EasyLevel();
                         break;
                     case "2":
-                        Console.WriteLine($"You chose hard level.");
                         HardLevel();
                         break;
                     case "3":
@@ -32,14 +32,26 @@ namespace MemoryGame
         }
         private static void EasyLevel()
         {
+            List<string> randomWords = new List<string>();
+            var chances = 10;
             Console.Clear();
-            Console.WriteLine($"Easy level started");
-            var words = File.ReadAllText(@"C:\Users\Marcin\source\repos\MemoryGame\Words.txt");
-            string[] wordsArray = words.Split(Environment.NewLine);
-            Random rnd = new Random();
-            var wordNumber = rnd.Next(0, wordsArray.Length);
-            var output = wordsArray[wordNumber];
-            Console.WriteLine(output);
+            Console.WriteLine($"—-----------------------------------{Environment.NewLine}"+
+                                $"Level: easy{Environment.NewLine}" +
+                                $"Guess chances: {chances}{Environment.NewLine}");
+
+            List<string> words = new List<string>(File.ReadAllLines(@"C:\Users\Marcin\source\repos\MemoryGame\Words.txt"));
+            for (var i = 0; i < 4;)
+            {
+                var wordNumber = rnd.Next(0, words.Count);
+                var output = words[wordNumber];
+                if (randomWords.Contains(output))
+                    continue;
+                else
+                {
+                    randomWords.Add(output);
+                    i++;
+                }
+            }
         }
 
         private static void HardLevel()
