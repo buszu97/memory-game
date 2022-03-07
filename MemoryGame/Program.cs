@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace MemoryGame
 {
@@ -34,13 +33,6 @@ namespace MemoryGame
         {
             Console.Clear();
             Console.WriteLine($"Easy level started");
-
-            string words = File.ReadAllText(@"C:\Users\Marcin\source\repos\MemoryGame\Words.txt");
-            string[] wordsArray = words.Split(Environment.NewLine);
-            Random randomWord = new Random();
-            var wordsNumber = randomWord.Next(0, wordsArray.Length);
-            var output = wordsArray[wordsNumber];
-            Console.WriteLine(output, Environment.NewLine);
         }
 
         private static void HardLevel()
