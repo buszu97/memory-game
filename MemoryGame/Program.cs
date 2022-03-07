@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MemoryGame
 {
@@ -33,6 +34,12 @@ namespace MemoryGame
         {
             Console.Clear();
             Console.WriteLine($"Easy level started");
+            var words = File.ReadAllText(@"C:\Users\Marcin\source\repos\MemoryGame\Words.txt");
+            string[] wordsArray = words.Split(Environment.NewLine);
+            Random rnd = new Random();
+            var wordNumber = rnd.Next(0, wordsArray.Length);
+            var output = wordsArray[wordNumber];
+            Console.WriteLine(output);
         }
 
         private static void HardLevel()
@@ -41,7 +48,7 @@ namespace MemoryGame
         }
         private static void DisplayChoices()
         {
-            Console.WriteLine($"====================");
+            Console.WriteLine($" ====================");
             Console.WriteLine($"Choose difficulty level and press enter{Environment.NewLine}");
             Console.WriteLine($"1. Easy {Environment.NewLine}" +
                                 $"2. Hard {Environment.NewLine}" +
